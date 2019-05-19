@@ -29,15 +29,33 @@ class State:
 
 
 #takes an array of states and links them together through a and b
-def connect(arr):
-    length = len(arr)
+def connect(dfa):
+    length = len(dfa)
     for i in range(length):
         temp = random.randint(0,length-1)
-        arr[i].a = arr[temp]
+        dfa[i].a = dfa[temp]
         temp = random.randint(0,length-1)
-        arr[i].b = arr[temp]
+        dfa[i].b = dfa[temp]
 
 #prints all states
-def printAll(arr):
-    for i in range(len(arr)):
-        arr[i].printSt()
+def printAll(dfa):
+    for i in range(len(dfa)):
+        dfa[i].printSt()
+
+visited = []
+
+#recursive function that calculates the depth and fills in the visited array.
+def calcDepth(currentState, depth):
+    l = 0
+    r = 0
+    if currentState in visited:
+        return depth-1
+    else:
+        visited.append(currentState)
+        l = calcDepth(currentState.a, depth+1)
+        r = calcDepth(currentState.b, depth+1)
+        if l < r :
+            return r 
+        else:
+            return l
+
