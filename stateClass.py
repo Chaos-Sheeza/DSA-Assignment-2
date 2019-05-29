@@ -60,7 +60,7 @@ def calcDepth(currentState, depth = 0):
             return r 
         else:
             return l
-            
+
 '''
 
 vis = []
@@ -82,3 +82,34 @@ def __tocalc(arrStat, depth = 0, tovisit = []):
         return depth
     else:
         return __tocalc(tovisit, depth+1, [])
+
+def check(string, currentState):
+    if len(string) == 0:
+        return currentState.label
+    else:
+        if string[0] == 'a':
+            return check(string[1:], currentState.a)
+        elif string[0] == 'b':
+            return check(string[1:], currentState.b)
+
+def genWords(size = 100):
+    strings = []
+    for x in range(size):
+        word = ""
+        s = random.randint(0,128)
+        for y in range(s):
+            temp = random.randint(0,1)
+            if temp == 0:
+                word += "a"
+            else:
+                word += "b"
+        strings.append(word)
+    return strings
+
+def checkWords(strings, dfa):
+    for x in strings:
+        temp = check(x, dfa[0])
+        if temp:
+            print(x, ":: Accepting")
+        else:
+            print(x, ":: Rejecting")
