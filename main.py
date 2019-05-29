@@ -15,8 +15,8 @@ for i in range(size):
 connect(dfa)
 #printing for debugging
 printAll(dfa)
-print(startState+1)
-print(calcDepth(dfa[startState], 0))
+#print("Depth = ", calcDepth(dfa[startState]))
+print("Depth = ", tocalc(dfa[startState]))
 #remStates(dfa, startState, size)
-dfa = visited
+dfa = vis
 printAll(dfa)

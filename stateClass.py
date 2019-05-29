@@ -42,10 +42,12 @@ def printAll(dfa):
     for i in range(len(dfa)):
         dfa[i].printSt()
 
+'''
+
 visited = []
 
 #recursive function that calculates the depth and fills in the visited array.
-def calcDepth(currentState, depth):
+def calcDepth(currentState, depth = 0):
     l = 0
     r = 0
     if currentState in visited:
@@ -58,4 +60,25 @@ def calcDepth(currentState, depth):
             return r 
         else:
             return l
+            
+'''
 
+vis = []
+
+def tocalc(firstState):
+    vis.append(firstState)
+    return __tocalc([firstState])
+
+def __tocalc(arrStat, depth = 0, tovisit = []):
+    for x in arrStat:
+        if not x.a in vis:
+            tovisit.append(x.a)
+            vis.append(x.a)
+        if not x.b in vis:
+            tovisit.append(x.b)
+            vis.append(x.b)
+
+    if len(tovisit) == 0:
+        return depth
+    else:
+        return __tocalc(tovisit, depth+1, [])
